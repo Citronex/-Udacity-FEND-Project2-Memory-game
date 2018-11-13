@@ -3,16 +3,6 @@
  */
 let deck = document.body.querySelectorAll('li.card');
 
-/*
-* This is how I'd turn the above list into an actual array, JIC:
-* let nodesArray = [].slice.call(deck);
-*  
-* For testing:	
-*  deck.forEach(card => {
-*     card.className = "card";});
-*   }
-*/
-
 //icons list to be shuffled
 let listaIconos = ["fa-diamond","fa-paper-plane-o","fa-anchor","fa-bolt","fa-cube","fa-anchor","fa-leaf","fa-bicycle","fa-diamond","fa-bomb","fa-leaf","fa-bomb","fa-bolt","fa-bicycle","fa-paper-plane-o","fa-cube"];
 
@@ -52,6 +42,32 @@ const shuffleAndDisplayAsHidden = function(){
 
 shuffleAndDisplayAsHidden();
 
+//Timer from stackoverflow questions 5517597
+let minutesLabel = document.getElementById("minutes");
+let secondsLabel = document.getElementById("seconds");
+let totalSeconds = 0;
+
+function setTime() {
+    ++totalSeconds;
+    secondsLabel.innerHTML = pad(totalSeconds % 60);
+    minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+  }
+  
+  function pad(val) {
+    let valString = val + "";
+    if (valString.length < 2) {
+      return "0" + valString;
+    } else {
+      return valString;
+    }
+  }
+
+let playingTime = setInterval(function(){ setTime() }, 1000);
+
+function stopTimer() {
+    clearInterval(playingTime);
+}
+
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -62,29 +78,28 @@ shuffleAndDisplayAsHidden();
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+//Keeps track of flipped pairs
 let openShowCards = [];
+//Keeps track of total moves
+let totalMoves = 0;
+//Keeps track of total pairs found
+let totalPairsFound = 0;
 
-// function cardOpenShow(event) {
-//     event.target.classList.add('open', 'show');
-//      //Add it to temp array
-//         addToOpenShowArray(event);
-//         return openShowCards.length;
-// }
-
-function cardRemoveOpenShow(event) {
-    event.target.classList.remove('open', 'show');
-}
+//Restart the game when icon is clicked;
+function restart() {
+    window.location.reload(true);
+  }
 
 function addToOpenShowArray(event){
     openShowCards.push(event.target.firstElementChild.className);
-    console.log(event.target.firstElementChild.className);
 }
 
 function cardsMatch(){
         //mark cards as 'card match'
         let pairedCards = document.body.getElementsByClassName(openShowCards[0]); 
         for (let card of pairedCards) {
-            card.parentElement.className = 'card match';
+        card.parentElement.className = 'card match';
         }
 }
 
@@ -94,34 +109,50 @@ function noMatch() {
         setTimeout(function(){
         for (let i = 1; i >= 0; i--){
            unPairedCards[i].classList.remove('open', 'show');
-        }}, (1000));
-    }
+        }}, (500));
+}
 
+function movesRating(){
+    if (totalMoves > 21 && totalMoves < 31){
+        document.body.querySelector('#threeStar').style.cssText = 'color: black';
+    } else if(totalMoves > 31){
+        document.body.querySelector('#twoStar').style.cssText = 'color: black';
+    }
+}
+let moves = document.body.querySelector('.moves');
 document.querySelector('.deck').addEventListener('click',function(event){
 	if (event.target.nodeName === 'LI') {
         if (event.target.classList == 'card'){
+            //Add a move to totalMoves per every click on a card;
+            document.body.querySelector('.moves').textContent = totalMoves+=event.detail;
+            //Check Star-score
+            movesRating();
             //Show the clicked card
             event.target.classList.add('open', 'show');
             //add the clicked card to 'openShowCards' array
-            openShowCards.push(event.target.firstElementChild.className);
-            // console.log(event.target.firstElementChild.className);
-            // console.log(openShowCards.length);
+            addToOpenShowArray(event)
+            //If array has 2 cards
             if (openShowCards.length == 2){
+                //If the 2 cards match
                 if(openShowCards[0] == openShowCards[1]){
-                    //mark cards as 'card match'
-                    let pairedCards = document.body.getElementsByClassName(openShowCards[0]); 
-                    for (let card of pairedCards) {
-                    card.parentElement.className = 'card match';
+                    //mark cards as a match
+                    cardsMatch();
+                    //add a match to totalPairsFound
+                    totalPairsFound+=1;
+                    console.log(totalPairsFound);
+                    //check if game is over
+                    if(totalPairsFound == 8){
+                        stopTimer();
                     }
+                  //if the 2 cards don't match  
                 } else if(!(openShowCards[0] == openShowCards[1])) {
-                    //need to make this wait so 2nd card can be seen!
+                    //Show the unmatched cards for a little
+                    // and then flip them back
                     noMatch();
-                } 
+                }
+                //Empty the array keeping track of pairs 
                 openShowCards = [];  
+            } 
         } 
-    } 
-    // else if (event.target.nodeName === 'LI' && event.target.classList.contains('show')) {
-    //     cardRemoveOpenShow(event);
-    //     }
 	}
 });

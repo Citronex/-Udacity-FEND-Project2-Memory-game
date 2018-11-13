@@ -15,18 +15,21 @@
             <h1>Matching Game</h1>
         </header>
 
-        <section class="score-panel">
+        <section id="scorePanel" class="score-panel">
         	<ul class="stars">
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
+        		<li><i id="oneStar" class="fa fa-star"></i></li>
+        		<li><i id="twoStar" class="fa fa-star"></i></li>
+        		<li><i id="threeStar" class="fa fa-star"></i></li>
         	</ul>
 
-        	<span class="moves">3</span> Moves
-
-            <div class="restart">
+            <span class="moves">0</span> Move(s)
+            <div class="restart" onclick="restart()">
         		<i class="fa fa-repeat"></i>
-        	</div>
+            </div>
+            
+            <div id = "timer" class = "timer">
+                <label id="minutes">00</label>:<label id="seconds">00</label>
+              </div>
         </section>
 
         <ul class="deck">
