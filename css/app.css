@@ -94,7 +94,7 @@ h1 {
 }
 
 .score-panel .stars,
-#modalStars
+.modal-content .stars
 {
   margin: 0;
   padding: 0;
@@ -134,7 +134,7 @@ h1 {
     max-width: 360px;
     padding : 40px;
     border-radius: 10px;
-    background-color: blanchedalmond;
+    background-color: rgb(224, 255, 205);
   }
   
   .modal-title {
@@ -151,14 +151,6 @@ h1 {
     text-align: center;
   }
 
-  /* #modalStars {
-    list-style: none;
-    display: inline-block;
-    margin: 0 5px 0 0;
-    color: gold;
-  } */
-
-  
   /* Galaxy S5
   *  Pixel
   *  iPhone
@@ -205,7 +197,7 @@ h1 {
   }
   
   /*
-  * iPad
+  * Pixel 2
   */
   @media only screen and (min-width: 401px) and (max-width: 665px) {
   
@@ -245,12 +237,12 @@ h1 {
   }
   
   /* 
-  * iPad Pro
+  * iPad
   */
   @media only screen and (min-width: 666px) and (max-width: 800px) {
   
     header {
-      width: 660px;
+      width: 662px;
       padding-left: 10px;
     }
   
@@ -262,7 +254,6 @@ h1 {
     .deck {
       max-width: 660px;
       min-height: 600px;
-      /*padding: 20px*/
       justify-content: space-between;
     }
   
