@@ -31,6 +31,8 @@ body {
 h1 {
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
+    text-transform: full-width;
+    text-align: center;
 }
 
 /*
@@ -91,17 +93,21 @@ h1 {
     margin-bottom: 10px;
 }
 
-.score-panel .stars {
-    margin: 0;
-    padding: 0;
-    display: inline-block;
-    margin: 0 5px 0 0;
+.score-panel .stars,
+#modalStars
+{
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  margin: 0 5px 0 0;
+  color: gold;
 }
 
-.score-panel .stars li {
-    list-style: none;
-    display: inline-block;
-    color: gold;
+.score-panel .stars li,
+.modal .stars li
+{
+  list-style: none;
+  display: inline-block;
 }
 
 .score-panel .restart {
@@ -112,4 +118,169 @@ h1 {
 #timer {
     margin-left: 40px;
     display: inline-block;
+  }
+
+/*
+* Winning Modal
+*/
+
+.modal {
+    display: none;
+    position: fixed;
+    background-color: rgba(0,0,0,0.4);
+  }
+  
+  .modal-content {
+    max-width: 360px;
+    padding : 40px;
+    border-radius: 10px;
+    background-color: blanchedalmond;
+  }
+  
+  .modal-title {
+    text-align: center;
+  }
+  
+  .modal-elements {
+    display: inline-block;
+    align-items: center;
+  }
+  
+  .modal-message {
+    font-size: 2em;
+    text-align: center;
+  }
+
+  /* #modalStars {
+    list-style: none;
+    display: inline-block;
+    margin: 0 5px 0 0;
+    color: gold;
+  } */
+
+  
+  /* Galaxy S5
+  *  Pixel
+  *  iPhone
+  */
+  @media only screen and (min-width: 360px) and (max-width: 400px) {
+  
+    header {
+      width: 350px;
+      padding-left: 10px;
+    }
+  
+    .score-panel {
+       width: 100%;
+       font-size: 12px;
+     }
+  
+    .deck {
+      max-width: 350px;
+      min-height:450px;
+      justify-content: space-between;
+    }
+  
+    .deck .card {
+      background-color: lightgrey;
+      width: 60px;
+      height: 55px;
+    }
+  
+    .deck .card.open {
+      font-size: 15px;
+    }
+  
+    .deck .card.match {
+      font-size: 15px;
+    }
+  
+    .modal-content {
+      max-width: 200px;
+      padding : 10px;
+      border-radius: 5px;
+      background-color: beige;
+      font-size: 15px;
+    }
+  }
+  
+  /*
+  * iPad
+  */
+  @media only screen and (min-width: 401px) and (max-width: 665px) {
+  
+    header {
+      width: 400px;
+      padding-left: 10px;
+    }
+  
+    .score-panel {
+       width: 100%;
+       font-size: 16px;
+     }
+  
+    .deck {
+      max-width: 400px;
+      min-height: 600px;
+      justify-content: space-between;
+    }
+  
+    .deck .card {
+      padding: 20px;
+      width: 70px;
+      height: 65px;
+    }
+  
+    .deck .card.open {
+      font-size: 30px;
+    }
+  
+    .modal-content {
+      max-width: 300px;
+      padding : 10px;
+      border-radius: 5px;
+      background-color: beige;
+      font-size: 20px;
+    }
+  }
+  
+  /* 
+  * iPad Pro
+  */
+  @media only screen and (min-width: 666px) and (max-width: 800px) {
+  
+    header {
+      width: 660px;
+      padding-left: 10px;
+    }
+  
+    .score-panel {
+       width: 100%;
+       font-size: 16px;
+     }
+  
+    .deck {
+      max-width: 660px;
+      min-height: 600px;
+      /*padding: 20px*/
+      justify-content: space-between;
+    }
+  
+    .deck .card {
+      padding: 20px;
+      width: 120px;
+      height: 120px;
+    }
+  
+    .deck .card.open {
+      font-size: 30px;
+    }
+  
+    .modal-content {
+      max-width: 300px;
+      padding : 10px;
+      border-radius: 5px;
+      background-color: beige;
+      font-size: 20px;
+    }
   }

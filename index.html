@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <title>Matching Game</title>
     <meta name="description" content="">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha384-xBuQ/xzmlsLoJpyjoggmTEz8OWUFM0/RC5BsqQBDX2v5cMvDHcMakNTNrHIW2I5f" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=1">
     <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
     <link rel="stylesheet" href="css/app.css">
@@ -13,24 +15,41 @@
     <div class="container">
         <header>
             <h1>Matching Game</h1>
-        </header>
-
-        <section id="scorePanel" class="score-panel">
-        	<ul class="stars">
-        		<li><i id="oneStar" class="fa fa-star"></i></li>
-        		<li><i id="twoStar" class="fa fa-star"></i></li>
-        		<li><i id="threeStar" class="fa fa-star"></i></li>
-        	</ul>
-
-            <span class="moves">0</span> Move(s)
-            <div class="restart" onclick="restart()">
-        		<i class="fa fa-repeat"></i>
+                <section id="scorePanel" class="score-panel">
+                    <ul class="stars">
+                        <li><i id="oneStar" class="fa fa-star"></i></li>
+                        <li><i id="twoStar" class="fa fa-star"></i></li>
+                         <li><i id="threeStar" class="fa fa-star"></i></li>
+                    </ul>
+                        <span class="moves">0</span> Move(s)
+                        <div class="restart" onclick="restart()">
+                        <i class="fa fa-repeat"></i>
+                        </div>
+                        
+                        <div id = "timer" class = "timer">
+                            <label id="minutes">00</label>:<label id="seconds">00</label>
+                        </div>
+                </section>
+            <!-- Winning Modal -->
+            <div id ="winModal" class="modal">
+                <div class="modal-content">
+                  <h3 class="modal-title">You Won!</h3>
+      
+                  <div class="modal-element">
+                    <span id="modalMoves">Moves :</span>
+                  </div>
+                  <div class="modal-element">
+                    <span id="modalStars"> Stars :</span>
+                  </div>
+                  <div class="modal-element">
+                    <span id="modalTime">Time :</span>
+                  </div>
+                  <div class="modal-element">
+                    <button onclick="restart()" id="newgame">Play again?</button>
+                  </div>
+                </div>
             </div>
-            
-            <div id = "timer" class = "timer">
-                <label id="minutes">00</label>:<label id="seconds">00</label>
-              </div>
-        </section>
+        </header>
 
         <ul class="deck">
             <li class="card">

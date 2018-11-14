@@ -113,12 +113,33 @@ function noMatch() {
 }
 
 function movesRating(){
-    if (totalMoves > 21 && totalMoves < 31){
+    if (totalMoves > 30 && totalMoves < 40){
         document.body.querySelector('#threeStar').style.cssText = 'color: black';
-    } else if(totalMoves > 31){
+    } else if(totalMoves > 41){
         document.body.querySelector('#twoStar').style.cssText = 'color: black';
     }
 }
+
+function winningModal() { 
+
+    let modal = document.getElementById('winModal');
+    let moves = document.querySelector('.moves');
+    let stars = document.querySelector('.stars');
+    let modalStars = stars.cloneNode(true);
+    let timer = document.getElementById('timer');
+
+    document.querySelector('#modalMoves').insertAdjacentText('beforeend',moves.textContent);
+    document.querySelector("#modalStars").insertAdjacentElement("beforeend", modalStars);
+    document.querySelector('#modalTime').insertAdjacentText("beforeend", timer.innerText);
+
+    modal.style.display = 'block';
+
+    // $('.timer').clone().appendTo($('.modal-element').find('#newtime'));
+    // $('.stars').clone().appendTo($('.modal-element').find('#modal-stars'));
+    // $('.modal').css('display','block');
+    // document.getElementById('winDialog').showModal(); 
+}
+
 let moves = document.body.querySelector('.moves');
 document.querySelector('.deck').addEventListener('click',function(event){
 	if (event.target.nodeName === 'LI') {
@@ -139,10 +160,10 @@ document.querySelector('.deck').addEventListener('click',function(event){
                     cardsMatch();
                     //add a match to totalPairsFound
                     totalPairsFound+=1;
-                    console.log(totalPairsFound);
                     //check if game is over
                     if(totalPairsFound == 8){
                         stopTimer();
+                        winningModal();
                     }
                   //if the 2 cards don't match  
                 } else if(!(openShowCards[0] == openShowCards[1])) {
